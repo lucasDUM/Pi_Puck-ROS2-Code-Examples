@@ -19,6 +19,13 @@ For more information about the Pi-puck and Webots, see:
 - Webots paper - https://link.springer.com/chapter/10.1007/978-3-540-78317-6_23
 
 ![](Assets/Pi-Puck-Sim.JPG)
+
+The sections go as follows:
+- Webots
+- ROS2
+  - Frontier detection
+  - Path finding
+  - Data collection
 ## Webots
 Webots has support for the [epuck2](https://www.gctronic.com/doc/index.php/e-puck2) robot however, this includes support for the Pi-Puck.
 This is an early version of the Pi-Puck so a few modifications had to be made. 
@@ -37,3 +44,9 @@ source /opt/ros/foxy/setup.bash
 . install/setup.bash
 ros2 launch webots_ros2_epuck robot_multi_launch.py
 ```
+This will launch the Pi-Puck in a maze world. I have also added the world and driver for the Pi-Puck with multiple small lidars.
+
+## ROS2
+## Frontier detection
+## Path finding
+## Data Collection
