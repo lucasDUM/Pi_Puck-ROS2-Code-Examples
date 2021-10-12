@@ -1,0 +1,44 @@
+#VRML_SIM R2020b utf8
+# Tof sensor of the e-puck mobile robot.
+
+PROTO E-puckFakeLidar [
+  field SFVec3f    translation  0 0 0
+  field SFRotation rotation     0 0 0 0
+  field SFString   name         "tof"
+]
+{
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    children [
+      Lidar {
+          rotation 0 0 0 0
+          #1.5708
+          #3.14159
+          #4.7124
+          name IS name
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+              	 roughness 0.4
+                 metalness 0
+                  }
+                  geometry Box {
+                    size 0.002 0.007 0.004
+                  }
+                }
+              ]  
+          spherical FALSE
+          noise 0.0
+          horizontalResolution 13
+          fieldOfView 0.34907
+          numberOfLayers 1
+          minRange 0.04
+          maxRange 0.5
+        }
+    ]
+    name IS name
+    model "e-puck tof sensor"
+  }
+}
