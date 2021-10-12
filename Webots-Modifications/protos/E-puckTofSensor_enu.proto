@@ -1,0 +1,43 @@
+#VRML_SIM R2020b utf8
+# Tof sensor of the e-puck mobile robot.
+
+PROTO E-puckTofSensor_enu [
+  field SFVec3f    translation  0 0 0
+  field SFRotation rotation     0 0 0 0
+  field SFString   name         "tof"
+  field SFInt32    numberOfRays 1         # Is `DistanceSensor.numberOfRays`.
+]
+{
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    children [
+      DistanceSensor {
+        rotation 0 0 0 0
+        name IS name
+        children [
+          Shape { # sensor body
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 0.4
+              metalness 0
+            }
+            geometry Box {
+              size 0.002 0.007 0.004
+            }
+          }
+        ]
+        lookupTable [
+          0 0 1
+          0.04 0.04 0.02
+          1.35 1.35 0.02
+        ]
+        type "generic"
+        numberOfRays IS numberOfRays
+        aperture 0.7
+      }
+    ]
+    name IS name
+    model "e-puck tof sensor"
+  }
+}
