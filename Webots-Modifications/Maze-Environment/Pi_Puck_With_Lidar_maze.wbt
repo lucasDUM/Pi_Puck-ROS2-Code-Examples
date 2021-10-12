@@ -1,0 +1,214 @@
+#VRML_SIM R2020b utf8
+WorldInfo {
+  info [
+    "Simple e-puck simulation that can be controlled with ROS2."
+  ]
+  title "ROS2 simulation of the e-puck robot"
+}
+Viewpoint {
+  orientation 0.6855367379017815 -0.23290009931686192 -0.6897803452731746 0.9152992115107464
+  position -1.4670162072354138 -2.3888456989525992 3.4003647484965547
+  follow "e-puck"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+
+Solid {
+        children [
+        RectangleArena {
+          rotation 1 0 0 1.57
+          floorSize 2 2
+        }
+        Wall {
+          translation 0.885 0.5 0.0
+          rotation -1 0 0 -1.57
+          name "wall(23)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation 0.625 0.73 0.0
+          rotation -1 0 0 -1.57
+          name "wall(22)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation 0.5 0.5 0.0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(21)"
+          size 1 0.1 0.01
+        }
+        Wall {
+          translation -0.125 0.5 0.0
+          rotation -0.577 0.577 0.577 -2.094
+          name "wall(20)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation -0.65 0 0
+          rotation -1 0 0 -1.57
+          name "wall(19)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation -0.75 0.375 0.0
+          rotation 0.577 0.577 0.577 2.094
+          name "wall(18)"
+          size 0.75 0.1 0.01
+        }
+        Wall {
+          translation 0.115 0.76 0
+          rotation -1 0 0 -1.57
+          name "wall(17)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation -0.25 0.0 0.0
+          rotation -1 0 0 -1.57
+          name "wall(16)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation 0.75 -0.75 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(15)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation 0.255 -0.625 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(13)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation -0.125 0.25 0
+          rotation -1 0 0 -1.57
+          name "wall(14)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation 0.875 0 0
+          rotation -1 0 0 -1.57
+          name "wall(12)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation 0.745 -0.13 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(11)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation 0.25 0.5 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(10)"
+          size 1 0.1 0.01
+        }
+        Wall {
+          translation 0.5 -0.75 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(9)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation -0.535 0 0
+          rotation 1 0 0 1.57
+          name "wall(8)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation 0.375 -0.255 0
+          rotation -1 0 0 -1.57
+          name "wall(7)"
+          size 0.75 0.1 0.01
+        }
+        Wall {
+          translation 0.135 -0.5 0
+          rotation 1 0 0 1.57
+          name "wall(6)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation -0.5 -0.25 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(5)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation -0.5 0.5 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(4)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation -0.625 -0.5 0
+          rotation 1 0 0 1.57
+          name "wall(3)"
+          size 0.26 0.1 0.01
+        }
+        Wall {
+          translation -0.25 -0.75 0
+          rotation 0 0.707 0.707 3.141
+          name "wall(2)"
+          size 1 0.1 0.01
+        }
+        Wall {
+          translation -0.75 -0.25 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          name "wall(1)"
+          size 0.5 0.1 0.01
+        }
+        Wall {
+          translation -0.25 -0.125 0
+          rotation -0.577 -0.577 -0.577 -2.094
+          size 0.75 0.1 0.01
+        }
+      ]
+    }
+
+E-puck_enu {
+  name "epuck0"
+  translation -0.91 0 0
+  rotation -0.446 0.895 0.0 0.0
+  controller "<extern>"
+  version "2"
+  camera_width 640
+  camera_height 480
+  turretSlot [
+    Pi-puck { 	
+    }
+    DEF EPUCK_INERTIALUNIT InertialUnit {
+    }
+    E-puckFakeLidar {
+        translation -0.033 0.004 -0.009
+        rotation 0.707 0.0 0.707 3.14
+        name "tof0"
+        }
+    E-puckFakeLidar {
+        translation -0.024 0.004 0.0138
+        rotation 0.924 0.0115 0.382 -3.12
+        name "tof1"
+    	}
+    E-puckFakeLidar {
+        translation 0.024 0.004 0.0138
+        rotation -0.924 0.000122 0.383 -3.14
+        name "tof2"
+    	}
+     E-puckFakeLidar {
+        translation 0.033 0.004 -0.009
+        rotation -0.707 0.0 0.707 3.14
+        name "tof3"
+    	}
+    E-puckFakeLidar {
+        translation 0.024 0.004 -0.032
+        rotation -0.383 0.0000274 0.924 -3.14
+        name "tof4"
+    	}
+    E-puckFakeLidar {
+        translation -0.024 0.004 -0.032
+        rotation 0.383 -0.00122 0.924 3.14
+        name "tof5"
+    	}
+  ]
+}
