@@ -50,3 +50,11 @@ This will launch the Pi-Puck in a maze world. I have also added the world and dr
 ## Frontier detection
 ## Path finding
 ## Data Collection
+
+## Links to good tutorial and code bases
+
+- [Occupancy Grid Mapping with Webots and ROS2](https://towardsdatascience.com/occupancy-grid-mapping-with-webots-and-ros2-a6162a644fab)
+- [https://automaticaddison.com/](https://automaticaddison.com/) This whole website is very useful
+- [ROS2 cookbook](https://github.com/mikeferguson/ros2_cookbook)
+- [Basic video series about ROS2](https://www.reddit.com/r/ROS/comments/jipc4v/webots_ros2_tutorial_series/)
+- [Colcon build cheat sheet](https://github.com/ubuntu-robotics/ros2_cheats_sheet)
