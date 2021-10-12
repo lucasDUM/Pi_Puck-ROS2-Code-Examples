@@ -18,5 +18,7 @@ For more information about the Pi-puck and Webots, see:
 - Webots documentation - https://cyberbotics.com/doc/guide/index
 - Webots paper - https://link.springer.com/chapter/10.1007/978-3-540-78317-6_23
 
-![](assets/Pi-Puck-Sim.jpeg)
+![](Assets/Pi-Puck-Sim.JPG)
 ## Webots
+Webots has support for the [epuck2](https://www.gctronic.com/doc/index.php/e-puck2) robot however, this includes support for the Pi-Puck.
+This is an early version of the Pi-Puck so a few modifications had to be made. 
