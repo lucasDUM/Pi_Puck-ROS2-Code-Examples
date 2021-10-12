@@ -17,3 +17,6 @@ For more information about the Pi-puck and Webots, see:
 - Webots ROS2 GitHub - https://github.com/cyberbotics/webots_ros2
 - Webots documentation - https://cyberbotics.com/doc/guide/index
 - Webots paper - https://link.springer.com/chapter/10.1007/978-3-540-78317-6_23
+
+![](assets/Pi-Puck-Sim.jpeg)
+## Webots
