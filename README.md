@@ -26,6 +26,7 @@ The sections go as follows:
   - Frontier detection
   - Path finding
   - Data collection
+- Links to good tutorial and code bases
 ## Webots
 Webots has support for the [epuck2](https://www.gctronic.com/doc/index.php/e-puck2) robot however, this includes support for the Pi-Puck.
 This is an early version of the Pi-Puck so a few modifications had to be made. 
