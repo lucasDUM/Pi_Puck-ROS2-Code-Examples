@@ -87,41 +87,42 @@ It subscribes to a ```goal_topic``` and produced a ``` filtered goal_topic```. (
  - The marker ([An array of points](https://github.com/hasauino/rrt_exploration/blob/master/msg/PointArray.msg)) I made my own custom workspace just for messages. I would advise the same thing. However, the link points to the original ROS implementaion.
  
 ## Path finding
-To follow the swarm methodoloy I implemented a local pathfinder. There is a [navgating stack](https://github.com/ros-planning/navigation2) in ROS2 for this exact purpose but this is quite heavy weight (computaitaionaly expensive). 
+To follow the swarm methodoloy I implemented a simple local pathfinder based on the "Bug2 motion planning algorihtmn". A good implementaion of this algorithm is [this](https://automaticaddison.com/the-bug2-algorithm-for-robot-motion-planning/) which also goes on to explain how to create your own [Extended Kalman filter](https://en.wikipedia.org/wiki/Extended_Kalman_filter). 
 
-The Pi-Puck is a differetial drive robot so, the ododmetry data byitself is unstable and prone to errors over time, this may be do to surface friction or uneven surfaces. Though, this can also be due to bumps and getting stuck (The wheels will keep spinning). 
+There is also a [Navagation stack (Nav2)](https://github.com/ros-planning/navigation2) in ROS2 for pathfinding purposes but this is quite heavy weight. [Here](https://github.com/SteveMacenski/nav2_rosdevday_2021?ref=pythonrepo.com) is an example of this running on another robot using Python.
 
-It also has access to the IMU, this is anotehr source of odometry this tends to decrease ina ccurayc over time
+My code was unstable at times so instead of a full implementaion I've provided some methods and examples. Communication was realtively easy to do in the simulation however a lot harder in reality. Since it doesn't work, I haven't added it. In simple terms I created a gloabl script (which can run on every robot) that calulated the distances between there estimated positions. This can be very inaccurate in real life so this was the main challenge. Below is some short steps to try and mitigate this.
 
-Scan mathcing is a thing extarpoltion of data (fake data) lidar mode or writting own software.
+The Pi-Puck is a differetial drive robot so, the odometry data by itself is unstable and prone to errors over time, this may be do to surface friction or uneven surfaces. Though, this can also be due to bumps and getting stuck (The wheels will keep spinning). 
 
-If you are looking for error or calibration values for the marix see [this](https://github.com/yorkrobotlab/pi-puck-ros) the ROS driver for the Pi-Puck robot
+It also has access to an IMU, this acts as another source of odometry but this tends to decrease in accuracy over time.
 
-**Subscribed Topics**
- - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
- - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+I used the [robot localization package](http://docs.ros.org/en/melodic/api/robot_localization/html/index.html) to merge these two sources of odometry to create a better estimation. If you do use this method, make sure to use the ROS2 version and create the [Yaml file](https://roboticsbackend.com/ros2-yaml-params/) to the ROS2 specification.
+In regards to this method if you are looking for any error or calibration values see the [ROS driver](https://github.com/yorkrobotlab/pi-puck-ros) for the Pi-Puck robot
 
-**Published Topics**
- - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
- - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+Alternatively a lot of [simultaneous localisation and mapping (SLAM) methods](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping) have their own scan-matching algorihtms that estimate the global position within a map. 
+
+The Pi-Puck doesn't have enough scan data to take advantage of this however there are three areas to experiment in:
+- In the [ROS driver](https://github.com/yorkrobotlab/pi-puck-ros) for the Pi-Puck they use extrapolation to make fake laser data to increase the scan data. 
+- You could also run the tof sensors multiple times creating a "fake" lidar
+- Lastly, you could write your own scan matcher optimised for the Pi-Puck
 
 ## Data Collection
-I employed some basic data collection where I subscribed to some topics **(see below)** and manually saved the data from text files. 
+I employed some basic data collection where I subscribed to some topics **(see below)** and manually saved the data into text files. 
 I then compiled this data in python in [Jupyter notebook](https://jupyter.org/). I no longer have the code for this, but [this](https://www.geeksforgeeks.org/graph-plotting-in-python-set-1/) link is to a basic python tuturial for plotting graphs.
 
-I first created a ground truth map, this was in a simulation so I could model a perfect map easily. In a real enviroment, I would suggest either doing this from an image or using a more complex robot that is known to have great accuracy to do acheive this.
+I first created a ground truth map, this was in a simulation so I could model a perfect map easily. In a real enviroment, I would suggest either doing this from an image or using a more complex robot, that is known to have high accuracy.
 
-I then compared my generated map to this map to produce some statstics. 
-I also measured the odometry to use as a comparasion. See mt undergraduate dissertstaion to look at the graphs. 
+I then compared my generated map to this map to produce some statistics. 
+I also measured the odometry for each robot to use as a comparison baseline. 
 
 **Subscribed Topics**
  - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
  - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
 
-My topic names are arbitray and won't be correct, so you need to either change the names or create a parameter to allow name changing on the fly. 
+My topic names are arbitray and won't be correct, so you need to either change the names or create a parameter to allow name changing on the fly. (CP) 
 
-
-**See** this [paper](https://www.mdpi.com/2218-6581/6/3/21) by Z. Yan et al for an indeapth discussion of data collection methods.
+**See** this [paper](https://www.mdpi.com/2218-6581/6/3/21) by Z. Yan et al for a detailed discussion of data collection methods.
 ## Links to good tutorial and code bases
 
 - [Occupancy Grid Mapping with Webots and ROS2](https://towardsdatascience.com/occupancy-grid-mapping-with-webots-and-ros2-a6162a644fab)
@@ -129,3 +130,4 @@ My topic names are arbitray and won't be correct, so you need to either change t
 - [ROS2 cookbook](https://github.com/mikeferguson/ros2_cookbook)
 - [Basic video series about ROS2](https://www.reddit.com/r/ROS/comments/jipc4v/webots_ros2_tutorial_series/)
 - [Colcon build cheat sheet](https://github.com/ubuntu-robotics/ros2_cheats_sheet)
+- [Nav2 example](https://github.com/SteveMacenski/nav2_rosdevday_2021?ref=pythonrepo.com)
