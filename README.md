@@ -26,7 +26,9 @@ The sections go as follows:
   - Frontier detection
   - Path finding
   - Data collection
-- Links to good tutorial and code bases
+- Links to good tutorials and code bases
+
+TF tree nd other important standards in REPs [103](https://www.ros.org/reps/rep-0103.html) and [105](https://www.ros.org/reps/rep-0105.html)
 ## Webots Setup
 Webots has support for the [epuck2](https://www.gctronic.com/doc/index.php/e-puck2) robot however, this includes support for the Pi-Puck.
 This is an early version of the Pi-Puck so a few modifications had to be made. 
@@ -51,6 +53,8 @@ I have also added the world and driver for the Pi-Puck with multiple small lidar
 ## ROS2
 ## Frontier detection
 This part consists of a OpenCV-based frontier detector node, a filter node and an assigner node. It is based partially on [this](https://github.com/hasauino/rrt_exploration) implementaion in ROS. So, please check that out.
+
+The OpenCV-based frontier detector node is designed to run indivually on each robot, this is a local algorithmn. Make parameter for topic to easily assign name.
 
 **Subscribed Topics**
  - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
