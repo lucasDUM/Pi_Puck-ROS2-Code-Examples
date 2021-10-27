@@ -63,6 +63,17 @@ Scan mathcing is a thing extarpoltion of data (fake data) lidar mode or writting
 If you are looking for error or calibration values for the marix see [this](https://github.com/yorkrobotlab/pi-puck-ros) the ROS driver for the Pi-Puck robot
 
 ## Data Collection
+I employed some basic data collection where I subscribed to some topics (see below) and manually saved the data from text files. 
+I then compiled this data in python in [Jupyter notebook](https://jupyter.org/). I no longer have the code for this, but [this](https://www.geeksforgeeks.org/graph-plotting-in-python-set-1/) link is to a basic python tuturial for plotting graphs.
+
+I first created a ground truth map, this was in a simulation so I could model a perfect map easily. In a real enviroment, I would suggest either doing this from an image or using a more complex robot that is known to have great accuracy to do acheive this.
+
+I then compared my generated map to this map to produce some statstics. 
+I also measured the odometry to use as a comparasion. See mt undergraduate dissertstaion to look at the graphs. 
+
+#### Subscribed Topics
+ - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
 See this [paper](https://www.mdpi.com/2218-6581/6/3/21) by Z. Yan et al for an indeapth discussion of data collection methods.
 ## Links to good tutorial and code bases
 
