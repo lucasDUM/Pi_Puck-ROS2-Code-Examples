@@ -51,6 +51,16 @@ I have also added the world and driver for the Pi-Puck with multiple small lidar
 ## ROS2
 ## Frontier detection
 This part consists of a OpenCV-based frontier detector node, a filter node and an assigner node. It is based partially on [this](https://github.com/hasauino/rrt_exploration) implementaion in ROS. So, please check that out.
+
+**Subscribed Topics**
+ - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+
+
+**Published Topics**
+ - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+
 ## Path finding
 To follow the swarm methodoloy I implemented a local pathfinder. There is a [navgating stack](https://github.com/ros-planning/navigation2) in ROS2 for this exact purpose but this is quite heavy weight (computaitaionaly expensive). 
 
@@ -62,8 +72,16 @@ Scan mathcing is a thing extarpoltion of data (fake data) lidar mode or writting
 
 If you are looking for error or calibration values for the marix see [this](https://github.com/yorkrobotlab/pi-puck-ros) the ROS driver for the Pi-Puck robot
 
+**Subscribed Topics**
+ - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+
+**Published Topics**
+ - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+
 ## Data Collection
-I employed some basic data collection where I subscribed to some topics (see below) and manually saved the data from text files. 
+I employed some basic data collection where I subscribed to some topics **(see below)** and manually saved the data from text files. 
 I then compiled this data in python in [Jupyter notebook](https://jupyter.org/). I no longer have the code for this, but [this](https://www.geeksforgeeks.org/graph-plotting-in-python-set-1/) link is to a basic python tuturial for plotting graphs.
 
 I first created a ground truth map, this was in a simulation so I could model a perfect map easily. In a real enviroment, I would suggest either doing this from an image or using a more complex robot that is known to have great accuracy to do acheive this.
@@ -71,10 +89,14 @@ I first created a ground truth map, this was in a simulation so I could model a 
 I then compared my generated map to this map to produce some statstics. 
 I also measured the odometry to use as a comparasion. See mt undergraduate dissertstaion to look at the graphs. 
 
-#### Subscribed Topics
+**Subscribed Topics**
  - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
  - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
-See this [paper](https://www.mdpi.com/2218-6581/6/3/21) by Z. Yan et al for an indeapth discussion of data collection methods.
+
+My topic names are arbitray and won't be correct, so you need to either change the names or create a parameter to allow name changing on the fly. 
+
+
+**See** this [paper](https://www.mdpi.com/2218-6581/6/3/21) by Z. Yan et al for an indeapth discussion of data collection methods.
 ## Links to good tutorial and code bases
 
 - [Occupancy Grid Mapping with Webots and ROS2](https://towardsdatascience.com/occupancy-grid-mapping-with-webots-and-ros2-a6162a644fab)
