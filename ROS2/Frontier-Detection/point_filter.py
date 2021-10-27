@@ -36,9 +36,7 @@ class Filter(Node):
                 self.filter_callback,
                 10,
                 )
-        #Sub to simulated clock for time instead os uing rclpy.get()Node...time etc that isn't how you write it but hey ho
-        #This is basically what the use_sim_time paramter does but was easier just hard coding it
-        #Well actually i think sim_time subs to clocks and makes the rcl.py.time etc the sim time
+        #This is deprecated, use rclpy.get()... to find the time
         self.clock_sub = self.create_subscription (
                     Clock, 
                     '/clock',
