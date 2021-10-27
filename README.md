@@ -63,7 +63,7 @@ Scan mathcing is a thing extarpoltion of data (fake data) lidar mode or writting
 If you are looking for error or calibration values for the marix see [this](https://github.com/yorkrobotlab/pi-puck-ros) the ROS driver for the Pi-Puck robot
 
 ## Data Collection
-
+See this [paper](https://www.mdpi.com/2218-6581/6/3/21) by Z. Yan et al for an indeapth discussion of data collection methods.
 ## Links to good tutorial and code bases
 
 - [Occupancy Grid Mapping with Webots and ROS2](https://towardsdatascience.com/occupancy-grid-mapping-with-webots-and-ros2-a6162a644fab)
