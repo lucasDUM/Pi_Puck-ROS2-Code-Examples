@@ -52,6 +52,16 @@ I have also added the world and driver for the Pi-Puck with multiple small lidar
 ## Frontier detection
 This part consists of a OpenCV-based frontier detector node, a filter node and an assigner node. It is based partially on [this](https://github.com/hasauino/rrt_exploration) implementaion in ROS. So, please check that out.
 ## Path finding
+To follow the swarm methodoloy I implemented a local pathfinder. There is a [navgating stack](https://github.com/ros-planning/navigation2) in ROS2 for this exact purpose but this is quite heavy weight (computaitaionaly expensive). 
+
+The Pi-Puck is a differetial drive robot so, the ododmetry data byitself is unstable and prone to errors over time, this may be do to surface friction or uneven surfaces. Though, this can also be due to bumps and getting stuck (The wheels will keep spinning). 
+
+It also has access to the IMU, this is anotehr source of odometry this tends to decrease ina ccurayc over time
+
+Scan mathcing is a thing extarpoltion of data (fake data) lidar mode or writting own software.
+
+If you are looking for error or calibration values for the marix see [this](https://github.com/yorkrobotlab/pi-puck-ros) the ROS driver for the Pi-Puck robot
+
 ## Data Collection
 
 ## Links to good tutorial and code bases
