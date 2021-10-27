@@ -20,15 +20,16 @@ For more information about the Pi-puck and Webots, see:
 
 ![](Assets/Pi-Puck-Sim.JPG)
 
-The sections go as follows:
+**The sections go as follows:**
 - Webots
 - ROS2
   - Frontier detection
   - Path finding
   - Data collection
-- Links to good tutorials and code bases
+- Link to good tutorials and code bases
 
-TF tree nd other important standards in REPs [103](https://www.ros.org/reps/rep-0103.html) and [105](https://www.ros.org/reps/rep-0105.html)
+Before I get into the code I followed or mainly followed some standard practises see REPs [103](https://www.ros.org/reps/rep-0103.html) and [105](https://www.ros.org/reps/rep-0105.html). This should also explain a bit about how TF-Trees work in ROS/ROS2.
+
 ## Webots Setup
 Webots has support for the [epuck2](https://www.gctronic.com/doc/index.php/e-puck2) robot however, this includes support for the Pi-Puck.
 This is an early version of the Pi-Puck so a few modifications had to be made. 
@@ -83,7 +84,7 @@ It subscribes to a ```goal_topic``` and produced a ``` filtered goal_topic```. (
 
 **Published Topics**
  - PointArray ([geometry_msgs/PointStamped](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PointStamped.html))
- - The marker ([An array of points](https://github.com/hasauino/rrt_exploration/blob/master/msg/PointArray.msg)) I made my own custom workspace just for messages. I would advise the same thing. However, the link points to the ROS implementaion.
+ - The marker ([An array of points](https://github.com/hasauino/rrt_exploration/blob/master/msg/PointArray.msg)) I made my own custom workspace just for messages. I would advise the same thing. However, the link points to the original ROS implementaion.
  
 ## Path finding
 To follow the swarm methodoloy I implemented a local pathfinder. There is a [navgating stack](https://github.com/ros-planning/navigation2) in ROS2 for this exact purpose but this is quite heavy weight (computaitaionaly expensive). 
