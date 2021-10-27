@@ -4,7 +4,7 @@
 # ROS Version: ROS 2 Foxy Fitzroy
  
 """
-Any variable names with "self" should be defined in a class
+Any variable named with "self" should be defined in a class
 """
 
 #Some imports you might need
@@ -60,7 +60,8 @@ from geometry_msgs.msg import PointStamped, Point
             self.get_logger().info('Pose received: ' + ' x coord ' + str(self.goal_x_coordinates) + ' y coord '+ str(self.goal_y_coordinates))
 
 #This goal would then be used by the bug2 algorithm
-#Since we havce a list of goals could also implement any local path finding algorithm as long as it isn't too expensive           
+#Since we havce a list of goals could also implement any local path finding algorithm as long as it isn't too expensive
+#e.g. https://ros-developer.com/2018/04/16/breadth-first-search-bfs-and-depth-first-search-dsf-algorithm-in-python/
 #--------------------------------------------------------------------------#  
  
 def laser_callback(self, msg):
