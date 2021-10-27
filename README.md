@@ -116,9 +116,10 @@ I first created a ground truth map, this was in a simulation so I could model a 
 I then compared my generated map to this map to produce some statistics. 
 I also measured the odometry for each robot to use as a comparison baseline. 
 
+One note when comparing map quality: make sure the maps are aligned properly otherwise this won't work.
 **Subscribed Topics**
- - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
- - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+ - The map ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The odometry ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
 
 My topic names are arbitray and won't be correct, so you need to either change the names or create a parameter to allow name changing on the fly. (CP) 
 
