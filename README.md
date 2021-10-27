@@ -54,8 +54,16 @@ I have also added the world and driver for the Pi-Puck with multiple small lidar
 ## Frontier detection
 This part consists of a OpenCV-based frontier detector node, a filter node and an assigner node. It is based partially on [this](https://github.com/hasauino/rrt_exploration) implementaion in ROS. So, please check that out.
 
+**Froniter-detection**
 The OpenCV-based frontier detector node is designed to run indivually on each robot, this is a local algorithmn. Make parameter for topic to easily assign name.
 
+This passes goals to the filter. 
+
+**The filter node**
+This also runs on each system. 
+Though you could adapt it to subscibe to every robot in a sytem if you wanted to use it in a centralsied manor same with the open Cv detector
+
+This involes deleting points that are 
 **Subscribed Topics**
  - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
  - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
