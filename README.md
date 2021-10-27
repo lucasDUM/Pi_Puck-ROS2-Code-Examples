@@ -51,28 +51,40 @@ This will launch the Pi-Puck in a maze world.
 I have also added the world and driver for the Pi-Puck with multiple small lidars as an example of a proto-type.2
 
 ## ROS2
+All the code is made using Python and ROS2 libraries.
+
 ## Frontier detection
-This part consists of a OpenCV-based frontier detector node, a filter node and an assigner node. It is based partially on [this](https://github.com/hasauino/rrt_exploration) implementaion in ROS. So, please check that out.
+In order to carry out frontier detecion in ROS2 I adpated partially a [previous implementaion](https://github.com/hasauino/rrt_exploration) in ROS. 
 
-**Froniter-detection**
-The OpenCV-based frontier detector node is designed to run indivually on each robot, this is a local algorithmn. Make parameter for topic to easily assign name.
+My frontier detection consists of an OpenCV-based frontier detector node and a filter node with accompanying methods.
+**Frontier-detection node**
+The OpenCV-based frontier detector node is designed to run individually on each robot, it takes a local map defaulting to ```/epuck0/map/``` and produces a set of "goal" points. As well as some marker points for visual debugging. This then passes goals to the filter node.
 
-This passes goals to the filter. 
+The ```map_topic``` currently does not have a parameter so this has to be changed manually or simply create a parameter (CP). This is an occuring problem within the code base so I will label it as CP.
 
-**The filter node**
-This also runs on each system. 
-Though you could adapt it to subscibe to every robot in a sytem if you wanted to use it in a centralsied manor same with the open Cv detector
-
-This involes deleting points that are 
 **Subscribed Topics**
- - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
- - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
-
+ - The map ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The clock ([rosgraph_msgs/Clock](http://docs.ros.org/en/melodic/api/rosgraph_msgs/html/msg/Clock.html))
 
 **Published Topics**
- - The map (Topic name is defined by the ```~map_topic``` parameter) ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
- - The odometry (Topic name is defined by the ```~odom_topic``` parameter) ([nav_msgs/Odometry](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Odometry.msg))
+ - PointStamped ([geometry_msgs/PointStamped](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PointStamped.html))
+ - The marker ([visualization_msg/Marker](http://docs.ros.org/en/noetic/api/visualization_msgs/html/msg/Marker.html))
+ 
+**The filter node**
+This also runs on each robot because this is a swarm system so, it is local information only. If you did want to use it in a centralised manner you would have to make it subscribe to all the ```goal_topics```. (CP)
 
+The filter node involves deleting pointless goal points, this extends to old points (points now in occupied space) and invalid points.
+It subscribes to a ```goal_topic``` and produced a ``` filtered goal_topic```. (CP)
+
+**Subscribed Topics**
+ - The map ([nav_msgs/OccupancyGrid](http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html))
+ - The clock ([rosgraph_msgs/Clock](http://docs.ros.org/en/melodic/api/rosgraph_msgs/html/msg/Clock.html))
+ - PointStamped ([geometry_msgs/PointStamped](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PointStamped.html))
+
+**Published Topics**
+ - PointArray ([geometry_msgs/PointStamped](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PointStamped.html))
+ - The marker ([An array of points](https://github.com/hasauino/rrt_exploration/blob/master/msg/PointArray.msg)) I made my own custom workspace just for messages. I would advise the same thing. However, the link points to the ROS implementaion.
+ 
 ## Path finding
 To follow the swarm methodoloy I implemented a local pathfinder. There is a [navgating stack](https://github.com/ros-planning/navigation2) in ROS2 for this exact purpose but this is quite heavy weight (computaitaionaly expensive). 
 
