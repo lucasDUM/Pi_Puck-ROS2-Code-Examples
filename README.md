@@ -27,15 +27,15 @@ The sections go as follows:
   - Path finding
   - Data collection
 - Links to good tutorial and code bases
-## Webots
+## Webots Setup
 Webots has support for the [epuck2](https://www.gctronic.com/doc/index.php/e-puck2) robot however, this includes support for the Pi-Puck.
 This is an early version of the Pi-Puck so a few modifications had to be made. 
 
-I had to add the extra time of flight sensors (tof). I defined a proto file then added them into the [Webots_Ros2_Epuck Driver](https://github.com/lucas-d87u/Pi_Puck-ROS2-Code-Examples/blob/main/Webots-Modifications/driver.py). I also enabled the full use of the [IMU](https://en.wikipedia.org/wiki/Inertial_measurement_unit) sensor. This is done automatically by Webots when the component is added by the [Device Manager](https://github.com/cyberbotics/webots_ros2/blob/3a91326c3df2597a1a217d82ab1a60cdd7ce976b/webots_ros2_core/webots_ros2_core/devices/device_manager.py#L31).
+I had to add the extra time of flight sensors (tof). So, I defined a proto file (This is just a ["node"](https://www.cyberbotics.com/doc/reference/nodes-and-functions) or obeject you can intereact with). I then added them into the [Webots_Ros2_Epuck Driver](https://github.com/lucas-d87u/Pi_Puck-ROS2-Code-Examples/blob/main/Webots-Modifications/driver.py). I also enabled the full use of the [IMU](https://en.wikipedia.org/wiki/Inertial_measurement_unit) sensor. After adding the component, this is handled automatically by Webots in the [Device Manager](https://github.com/cyberbotics/webots_ros2/blob/3a91326c3df2597a1a217d82ab1a60cdd7ce976b/webots_ros2_core/webots_ros2_core/devices/device_manager.py#L31).
 
 The last change I made was to the launch files. In the [webots_ros2_core](https://github.com/cyberbotics/webots_ros2/tree/3a91326c3df2597a1a217d82ab1a60cdd7ce976b/webots_ros2_core/launch) file there is [robot_launch.py](https://github.com/cyberbotics/webots_ros2/blob/3a91326c3df2597a1a217d82ab1a60cdd7ce976b/webots_ros2_core/launch/robot_launch.py) I have replaced this with [robot_launch_multi.py](https://github.com/lucas-d87u/Pi_Puck-ROS2-Code-Examples/blob/main/Webots-Modifications/launch-files/robot_launch_multi.py) and this can be found in this repository. I have also ammended the corresponding launch file in [webots_ros2_epuck](https://github.com/cyberbotics/webots_ros2/tree/3a91326c3df2597a1a217d82ab1a60cdd7ce976b/webots_ros2_epuck) calling it [robot_multi_launch.py](Examples/blob/main/Webots-Modifications/launch-files/robot_multi_launch.py). 
 
-These are effectively the same except I added a for loop to append more controllers. These have to be set manually, though it should be simple to add a paramter to control this.
+These are effectively the same, except I added a for loop to append more controllers. These have to be set manually, though it should be simple to add a paramter to control this process.
 
 Assuming you have set up a ROS2 [work space](https://docs.ros.org/en/foxy/Tutorials/Workspace/Creating-A-Workspace.html) and set up the [Webots ROS2 package](https://github.com/cyberbotics/webots_ros2). You should be able to (after replacing or adding these files) to call the launch file like this.
 
@@ -45,10 +45,12 @@ source /opt/ros/foxy/setup.bash
 . install/setup.bash
 ros2 launch webots_ros2_epuck robot_multi_launch.py
 ```
-This will launch the Pi-Puck in a maze world. I have also added the world and driver for the Pi-Puck with multiple small lidars.
+This will launch the Pi-Puck in a maze world. 
+I have also added the world and driver for the Pi-Puck with multiple small lidars as an example of a proto-type.2
 
 ## ROS2
 ## Frontier detection
+This part consists of a OpenCV-based frontier detector node, a filter node and an assigner node. It is based partially on [this](https://github.com/hasauino/rrt_exploration) implementaion in ROS. So, please check that out.
 ## Path finding
 ## Data Collection
 
