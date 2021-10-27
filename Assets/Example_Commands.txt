@@ -1,0 +1,66 @@
+For ROS1:
+source /opt/ros/noetic/setup.bash
+ros-noetic-gmapping
+ros-noetic-gmapping-dbgsym
+
+source /opt/ros/noetic/setup.bash
+. ~/ros1_ws/devel/setup.bash
+
+catkin_make
+rosrun rqt_logger_level rqt_logger_level for dubugging
+rosrun rqt_tf_tree rqt_tf_tree for tf treeing
+
+roslaunch ros1stuff mapping.launch
+roslaunch ros1stuff merge.launch
+rosrun gmapping slam_gmapping scan:=scan
+roslaunch ros1stuff mapping.launch name:=epuck0
+roslaunch ros1stuff mapping.launch name:=epuck0 x:=0.0 y:=0.0 z:=0
+roslaunch ros1stuff mapping.launch name:=epuck0 x:=-0.1 y:=-0.1 z:=0
+roslaunch ros1stuff mapping.launch name:=epuck1 x:=-0.4 y:=-0.65 z:=0
+
+source /opt/ros/noetic/setup.bash
+source /opt/ros/foxy/setup.bash
+ros2 run ros1_bridge dynamic_bridge
+
+For Ros2:
+
+source /opt/ros/foxy/setup.bash
+. install/setup.bash
+
+ros-foxy-ros1-bridge
+ros-foxy-ros1-bridge-dbgsym
+ros-foxy-slam-toolbox
+ros-foxy-slam-toolbox-dbgsym
+To install a package you use sudo apt install package_name
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+We build our packages in the root folder of the workspace
+. or source install/local_setup.bash overlay locale work space using this command
+ros2 service list -t find all services and list the type (-t)
+
+ros2 run ros1_bridge dynamic_bridge
+
+ros2 run package_name executable_name --ros-args -p param_name:=param_value /launch arguments
+
+Webots temp urdf
+webots_robot_e-puck.urdf
+
+ros2 run robot_features_python path2
+
+ros2 run robot_features_python wall_f --ros-args -r __ns:=/epuck0 --remap /cmd_vel:=/epuck0/cmd_vel --remap  /scan:=/epuck0/scan
+ros2 run robot_features_python wall_f --ros-args -r __ns:=/epuck1 --remap /cmd_vel:=/epuck1/cmd_vel --remap  /scan:=/epuck1/scan
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/epuck0/cmd_vel
+
+ros2 launch webots_ros2_epuck robot_multi_launch.py
+
+ros2 run robot_features_python path --ros-args --remap /cmd_vel:=/epuck0/cmd_vel --remap  /scan:=/epuck0/scan --remap /odom:=/epuck0/odom
+ros2 run robot_features_python path --ros-args --remap /cmd_vel:=/epuck0/cmd_vel --remap  /scan:=/epuck0/scan --remap /odom:=/epuck0/odom --ros-args -p use_sim_time:=True
+
+ros2 run robot_features_python dis
+ros2 run robot_features_python filter
+
+ros2 launch robot_features_python pi_puck_ekf_launch.py
+
+ros2 run nav2_map_server map_saver_cli -f map1OBAV -t /map_merge/map --ros-args -p use_sim_time:=True
+
+reampping namespaces -r __ns:=<new node namespace>
