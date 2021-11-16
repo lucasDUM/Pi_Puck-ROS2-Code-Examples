@@ -60,7 +60,7 @@ def point_of_index(mapData, i):
 
 def informationGain(mapData, point, r):
     infoGain = 0
-    index = index_of_point(mapData, point) #Something liek 20,000 probs
+    index = index_of_point(mapData, point)
     r_region = int(r/mapData.info.resolution)
     init_index = index-r_region*(mapData.info.width+1)
     
